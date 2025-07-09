@@ -2,6 +2,23 @@
 
 ## 项目介绍
 基于[webhook](https://github.com/soulteary/webhook.git)特性创建的web页面。
+
+## 使用到的特性
+* pass-arguments-to-command
+- [x] source: string
+- [x] source: payload
+- [] source: query
+- [] source: header
+- [] source: request
+- [] source: entire-payload
+- [] source: entire-query
+- [] source: entire-headers
+- [] source: raw-request-body
+* pass-file-to-command
+- [x] source: payload
+* pass-environment-to-command
+- [x] source: string
+
 ### 功能列表
 - [x] ui: ui页面，展示配置信息，修改配置、上传可执行文件按钮
 - [x] edit_form: 编辑配置页面，展示yaml样式配置信息，保存配置、取消按钮
