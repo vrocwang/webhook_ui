@@ -18,6 +18,8 @@
 - [x] source: payload
 * pass-environment-to-command
 - [x] source: string
+* [ ] rules
+
 
 ### 功能列表
 - [x] ui: ui页面，展示配置信息，修改配置、上传可执行文件按钮
