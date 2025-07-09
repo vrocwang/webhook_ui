@@ -7,13 +7,13 @@
 * pass-arguments-to-command
 - [x] source: string
 - [x] source: payload
-- [] source: query
-- [] source: header
-- [] source: request
-- [] source: entire-payload
-- [] source: entire-query
-- [] source: entire-headers
-- [] source: raw-request-body
+- [ ] source: query
+- [ ] source: header
+- [ ] source: request
+- [ ] source: entire-payload
+- [ ] source: entire-query
+- [ ] source: entire-headers
+- [ ] source: raw-request-body
 * pass-file-to-command
 - [x] source: payload
 * pass-environment-to-command
