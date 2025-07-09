@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  webhook:
+    image: webhook
+    ports:
+      - "8002:8002"
+    environment:
+      HOST: "0.0.0.0"
+      PORT: 8002
+      VERBOSE: true
+      DEBUG: true
+      URL_PREFIX: ""
+      #HOT_RELOAD: true
+      HOOKS: /etc/webhook/config/hooks.yaml
+    volumes:
+      - ./config:/etc/webhook/config:rw
+      - ./scripts:/etc/webhook/scripts:rw

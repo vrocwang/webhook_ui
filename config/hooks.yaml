@@ -1,0 +1,93 @@
+- id: ui ##当使用get请求/ui时，执行/etc/webhook/scripts/ui/ui -edit /edit_form -upload /upload_form
+  execute-command: "/etc/webhook/scripts/ui/ui"
+  pass-arguments-to-command:
+    - source: string
+      name: -edit
+    - source: string
+      name: /edit_form
+    - source: string
+      name: -upload
+    - source: string
+      name: /upload_form
+  http-methods:
+    - "GET " # 空格不能少
+  include-command-output-in-response: true  # 结果返回给调用端
+  #incoming-payload-content-type: text/html
+  response-headers:
+    - name: Content-Type
+      value: text/html
+- id: edit_form ## 当使用get请求/edit_form时，执行/etc/webhook/scripts/edit_form/edit_form -home /ui -save /save
+  execute-command: "/etc/webhook/scripts/edit_form/edit_form"
+  pass-arguments-to-command:
+    - source: string
+      name: -home
+    - source: string
+      name: /ui
+    - source: string
+      name: -save
+    - source: string
+      name: /save
+  http-methods:
+    - "GET "
+  include-command-output-in-response: true # 结果返回给调用端
+  incoming-payload-content-type: text/html
+- id: save ## 当使用post请求/save时，执行/etc/webhook/scripts/save/save -home /ui --config-content <页面传入的json的config值>
+  execute-command: "/etc/webhook/scripts/save/save"
+  pass-arguments-to-command:
+    - source: string
+      name: -home
+    - source: string
+      name: /ui
+    - source: string
+      name: --config-content
+    - source: payload
+      name: config
+  http-methods:
+    - "POST "
+  include-command-output-in-response: true # 结果返回给调用端
+  incoming-payload-content-type: application/x-www-form-urlencoded
+- id: upload_form ## 当使用get请求/upload_form时，执行/etc/webhook/scripts/upload_form/upload_form -home /ui --upload-submit /upload-submit
+  execute-command: "/etc/webhook/scripts/upload_form/upload_form"
+  pass-arguments-to-command:
+    - source: string
+      name: -home
+    - source: string
+      name: /ui
+    - source: string
+      name: --upload-submit
+    - source: string
+      name: /upload-submit
+  http-methods:
+    - "GET "
+  include-command-output-in-response: true # 结果返回给调用端
+  #incoming-payload-content-type: text/html
+  response-headers:
+    - name: Content-Type
+      value: text/html
+- id: upload-submit ## 当使用post请求/upload-submit时，执行/etc/webhook/scripts/upload/upload --file-name <页面传入的json的file_name值> -home /ui
+  execute-command: "/etc/webhook/scripts/upload/upload"
+  http-methods:
+    - "POST "
+  include-command-output-in-response: true # 结果返回给调用端
+  incoming-payload-content-type: application/json
+  response-headers:
+    - name: Content-Type
+      value: text/html
+  pass-file-to-command:  ## 因为是把文件做base64处理，并赋值给json中的file_content，所以需要对其解码
+    - source: payload
+      name: file_content
+      envname: UPLOADED_FILE_PATH
+      base64deconde: true
+  pass-arguments-to-command:
+    - source: string
+      name: --file-name
+    - source: payload
+      name: file_name
+    - source: string
+      name: -home
+    - source: string
+      name: /ui
+  pass-environment-to-command:  ## 上传文件到指定目录
+    - source: string
+      envname: UPLOAD_DEST_DIR
+      name: /etc/webhook/scripts/upload_destination/
