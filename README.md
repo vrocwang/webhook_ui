@@ -27,6 +27,7 @@
 
 ## 使用说明
 ***前提条件：docker，docker-compose需要安装好***
+* 0、下载[webhook](https://github.com/soulteary/webhook.git)项目，并把本项目所有文件放到webhook目录中
 * 1、编译scripts下的各个脚本
 * 2、基于编译生成文件名称及参数修改config/hooks.yaml
 * 3、执行docker-compose up -d，启动项目
