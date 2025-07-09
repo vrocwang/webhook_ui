@@ -31,4 +31,4 @@
 * 1、编译scripts下的各个脚本
 * 2、基于编译生成文件名称及参数修改config/hooks.yaml
 * 3、执行docker-compose up -d，启动项目
-* 4、访问http://<ip>:8002/ui，访问ui页面
+* 4、访问http://ip:8002/ui，访问ui页面
